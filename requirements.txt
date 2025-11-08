@@ -1,0 +1,15 @@
+# Core audio/video + ML utilities
+ffmpeg-python
+librosa
+opencv-python
+soundfile
+
+# Timeline interchange
+opentimelineio
+
+# Agent + API interface
+openai
+
+# Optional: for text utilities and filesystem safety
+tqdm
+pathlib
