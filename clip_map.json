@@ -1,0 +1,8 @@
+{
+  "sink": "footage/sink_closeup.mp4",
+  "hallway": "footage/hallway_walkthrough.mp4",
+  "mirror": "footage/mirror_reflection.mp4",
+  "pill": "footage/pills_falling.mp4",
+  "tv": "footage/tv_static.mp4",
+  "default": "footage/fallback.mp4"
+}
