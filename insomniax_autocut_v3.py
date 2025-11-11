@@ -48,15 +48,35 @@ def ffmpeg_cut(src: str, start: float, end: float, dest: str,
 
 def choose_clip(scene_text: str, clip_map: dict) -> str:
     """Choose an appropriate clip based on scene text, with some randomness."""
+    if not clip_map:
+        raise ValueError("clip_map is empty; populate clip_map.json before rendering")
+
     scene_text = scene_text.lower()
     for tag, path in clip_map.items():
         if tag.lower() in scene_text:
             return path
+
+    default_entry = next(
+        (clip_map[key] for key in clip_map if key.lower() == "default"),
+        None,
+    )
+
     # 20% chance of random "wrong" insert for dream-logic variety
     if random.random() < 0.2:
-        return random.choice(list(clip_map.values()))
+        pool = [
+            path
+            for key, path in clip_map.items()
+            if key.lower() != "default" or default_entry is None
+        ]
+        if not pool and default_entry is not None:
+            pool = [default_entry]
+        return random.choice(pool)
+
+    if default_entry is not None:
+        return default_entry
+
     # fallback: first entry
-    return list(clip_map.values())[0]
+    return next(iter(clip_map.values()))
 
 
 def main() -> None:
